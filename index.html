@@ -883,10 +883,10 @@ textarea.in{min-height:92px;resize:vertical}
     document.getElementById('lang-es').setAttribute('aria-pressed', String(!en));
     document.getElementById('lang-en').setAttribute('aria-pressed', String(en));
     document.querySelectorAll('.err:not([hidden])').forEach(function (e) { if (e.dataset.k) e.textContent = MSG[idioma][e.dataset.k]; });
-    try { localStorage.setItem('ms-idioma', idioma); } catch (e) {}
   }
-  document.getElementById('lang-es').addEventListener('click', function () { ponIdioma('es'); });
-  document.getElementById('lang-en').addEventListener('click', function () { ponIdioma('en'); });
+  function elige(l) { ponIdioma(l); try { localStorage.setItem('ms-idioma', idioma); } catch (e) {} }
+  document.getElementById('lang-es').addEventListener('click', function () { elige('es'); });
+  document.getElementById('lang-en').addEventListener('click', function () { elige('en'); });
   var q = null, guardado = null;
   try { q = new URLSearchParams(location.search).get('lang'); } catch (e) {}
   try { guardado = localStorage.getItem('ms-idioma'); } catch (e) {}
@@ -943,17 +943,20 @@ textarea.in{min-height:92px;resize:vertical}
     c.addEventListener('input', function () { if (r.ok()) error(r.campo, r.err, r.k, false); });
   });
 
-  form.querySelectorAll('input[name="socio_metropolitan"]').forEach(function (i) {
-    i.addEventListener('change', function () {
-      var no = valorRadio('socio_metropolitan') === 'no';
-      document.getElementById('c-m2').hidden = !no;
-      document.getElementById('c-m3').hidden = !no;
-      if (!no) { error('c-m2', 'e-m2', 'radio', false); error('c-m3', 'e-m3', 'radio', false); }
-    });
-  });
+  /* Preguntas 2 y 3 de Metropolitan: se sincronizan al marcar, al cargar, al volver atras y al enviar. */
+  function sincronizaMetro() {
+    var no = valorRadio('socio_metropolitan') === 'no';
+    document.getElementById('c-m2').hidden = !no;
+    document.getElementById('c-m3').hidden = !no;
+    if (!no) { error('c-m2', 'e-m2', 'radio', false); error('c-m3', 'e-m3', 'radio', false); }
+  }
+  form.querySelectorAll('input[name="socio_metropolitan"]').forEach(function (i) { i.addEventListener('change', sincronizaMetro); });
+  sincronizaMetro();
+  window.addEventListener('pageshow', sincronizaMetro);
 
   form.addEventListener('submit', function (ev) {
     ev.preventDefault();
+    sincronizaMetro();
     var primero = null;
     REGLAS.forEach(function (r) {
       var bien = r.ok();
@@ -989,7 +992,7 @@ textarea.in{min-height:92px;resize:vertical}
       var nombre = datos.nombre.split(/\s+/)[0];
       nombreHecho = nombre;
       var h = document.getElementById('hecho-h');
-      h.textContent = MSG[idioma].hecho.replace('{n}', nombre);
+      h.textContent = MSG[idioma].hecho.replace('{n}', function () { return nombre; });
       var agenda = document.getElementById('agenda');
       if (AGENDA) {
         agenda.href = AGENDA; agenda.target = '_blank'; agenda.rel = 'noopener'; agenda.hidden = false;
@@ -999,7 +1002,9 @@ textarea.in{min-height:92px;resize:vertical}
       }
       document.getElementById('campos').hidden = true;
       document.getElementById('hecho').hidden = false;
-      h.focus();
+      // El formulario se encoge al ocultar los campos: llevar la vista al mensaje.
+      document.getElementById('solicitud').scrollIntoView({ block: 'start' });
+      h.focus({ preventScroll: true });
     }).catch(function () {
       errEnvio.dataset.k = 'envio';
       errEnvio.textContent = MSG[idioma].envio;

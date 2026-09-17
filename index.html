@@ -1,0 +1,1015 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Método SALVA</title>
+<meta name="description" content="Tu físico y tu rendimiento no deberían competir. El Método SALVA organiza fuerza, running, clases y HYROX alrededor de una prioridad clara, con seguimiento y app propia.">
+<meta name="theme-color" content="#2F6B4A">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Método SALVA">
+<meta property="og:title" content="Método SALVA">
+<meta property="og:description" content="Tu físico y tu rendimiento no deberían competir. Entrenamiento personalizado con seguimiento y app propia.">
+<meta property="og:image" content="https://metodosalva.github.io/web/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://metodosalva.github.io/web/">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link rel="stylesheet" href="https://fonts.bunny.net/css?family=ibm-plex-mono:400,500|ibm-plex-sans:400,500,600,700|ibm-plex-sans-condensed:500,600,700&amp;display=swap">
+<style>
+:root{
+  --papel:#F1EDE6; --sup:#FBF9F4; --sunk:#E8E2D7; --linea:#DDD5C8; --linea-2:#C9BFAF;
+  --tinta:#23231D; --txt:#45423A; --txt-2:#6E685A;
+  --verde:#2F6B4A; --verde-t:#E3ECE5; --on-verde:#F4F0E8;
+  --portada:#2F6B4A; --sobre:#F4F0E8; --sobre-2:#CFDFD3;
+  --rojo:#A83A34; --rojo-s:#F5E1DD; --ambar:#7A5C14; --ambar-s:#F3E9D1; --ok:#2F6B4A; --ok-s:#E4EEE7;
+  --bisel:#141814; --borde-campo:#857B6B;
+  /* la app real es siempre clara: su maqueta no cambia con el tema */
+  --a-papel:#F1EDE6; --a-sup:#FFFDFA; --a-linea:#E2DCD2; --a-verde:#2F6B4A; --a-sobre:#F6F3EE;
+  --a-tinta:#2F2D27; --a-txt:#4A463C; --a-txt3:#716A5C;
+  --a-rojo:#B03A3A; --a-rojo-s:#F8E4E1; --a-ambar:#86661B; --a-ambar-s:#F6EDD7; --a-ok-s:#E8F0EA;
+  --f-d:"IBM Plex Sans Condensed","Arial Narrow","Roboto Condensed",system-ui,sans-serif;
+  --f:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --m:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --gutter:clamp(18px,5vw,64px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --papel:#111613; --sup:#182019; --sunk:#0C100D; --linea:#27302A; --linea-2:#3A463F;
+    --tinta:#F0EBE1; --txt:#D2CBBD; --txt-2:#9C9585;
+    --verde:#7DBF95; --verde-t:#1B2B21; --on-verde:#111613;
+    --portada:#1E4A33; --sobre:#F0EBE1; --sobre-2:#A9C7B3;
+    --rojo:#E08A7F; --rojo-s:#3A201C; --ambar:#D8B35F; --ambar-s:#33291A; --ok:#7DBF95; --ok-s:#1C2E23;
+    --bisel:#050706; --borde-campo:#6A766E;
+  }
+}
+:root[data-theme="dark"]{
+  --papel:#111613; --sup:#182019; --sunk:#0C100D; --linea:#27302A; --linea-2:#3A463F;
+  --tinta:#F0EBE1; --txt:#D2CBBD; --txt-2:#9C9585;
+  --verde:#7DBF95; --verde-t:#1B2B21; --on-verde:#111613;
+  --portada:#1E4A33; --sobre:#F0EBE1; --sobre-2:#A9C7B3;
+  --rojo:#E08A7F; --rojo-s:#3A201C; --ambar:#D8B35F; --ambar-s:#33291A; --ok:#7DBF95; --ok-s:#1C2E23;
+  --bisel:#050706; --borde-campo:#6A766E;
+}
+
+/* base: primero el móvil */
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+body{margin:0;background:var(--papel);color:var(--txt);font-family:var(--f);font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+@media (min-width:760px){ body{font-size:17px} }
+p{margin:0}
+ol,ul{margin:0;padding:0;list-style:none}
+a{color:inherit}
+.wrap{width:100%;max-width:1180px;margin-inline:auto;padding-inline:var(--gutter)}
+:focus-visible{outline:2px solid var(--verde);outline-offset:3px}
+.hero :focus-visible,.pie :focus-visible{outline-color:var(--sobre)}
+
+
+/* cabecera */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;border-bottom:1px solid var(--linea);
+  background:color-mix(in srgb,var(--papel) 92%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.top .wrap{display:flex;align-items:center;gap:14px;min-height:56px}
+.wm{font-family:var(--f);font-weight:700;font-size:12.5px;letter-spacing:.22em;color:var(--tinta);text-decoration:none;white-space:nowrap}
+.nav{display:none;gap:26px;margin-left:auto}
+.nav a{text-decoration:none;font-size:15px;color:var(--txt)}
+.nav a:hover{color:var(--verde)}
+.top-acc{display:flex;align-items:center;gap:10px;margin-left:auto}
+@media (min-width:1040px){ .top .wrap{min-height:62px} .nav{display:flex} .top-acc{margin-left:0} }
+.lang{display:inline-flex;border:1px solid var(--linea-2);border-radius:99px;padding:2px}
+.lang button{border:0;background:transparent;color:var(--txt-2);font:500 12px/1 var(--m);letter-spacing:.08em;padding:10px 11px;border-radius:99px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--tinta);color:var(--papel)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 22px;border:0;border-radius:99px;
+  font:600 16px/1.2 var(--f);text-align:center;text-decoration:none;cursor:pointer}
+.btn-p{background:var(--verde);color:var(--on-verde)}
+.btn-p:hover{filter:brightness(1.08)}
+.top .btn{min-height:40px;padding:0 16px;font-size:14px;white-space:nowrap;display:none}
+@media (min-width:600px){ .top .btn{display:inline-flex} }
+
+/* portada */
+.hero{background:var(--portada);color:var(--sobre)}
+.hero .wrap{display:grid;gap:36px;padding-block:34px 44px}
+@media (min-width:960px){ .hero .wrap{grid-template-columns:minmax(0,1.3fr) minmax(0,.85fr);align-items:center;gap:56px;padding-block:88px} }
+.kick{font:500 11.5px/1.4 var(--m);letter-spacing:.16em;text-transform:uppercase;color:var(--verde);margin-bottom:12px}
+@media (min-width:760px){ .kick{font-size:12px;margin-bottom:16px} }
+.hero .kick{color:var(--sobre-2)}
+h1{font-family:var(--f-d);font-weight:700;text-transform:uppercase;font-size:clamp(2.25rem,6vw,4.6rem);line-height:.94;letter-spacing:-.01em;margin:0;text-wrap:balance}
+.hero .lead{font-size:clamp(1.02rem,1.5vw,1.24rem);line-height:1.55;max-width:46ch;margin-top:18px}
+.hero-cta{display:grid;gap:14px;margin-top:26px;justify-items:start}
+.hero-cta .btn{width:100%}
+@media (min-width:600px){ .hero-cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px} .hero-cta .btn{width:auto} }
+.btn-inv{background:var(--sobre);color:var(--portada)}
+.btn-inv:hover{filter:brightness(.96)}
+.enlace{font-weight:500;text-underline-offset:5px;text-decoration-thickness:1px;padding-block:6px}
+.hero .nota{font:12px/1.55 var(--m);color:var(--sobre-2);margin-top:18px;max-width:50ch}
+
+/* maqueta del móvil */
+.movil{justify-self:center;width:min(272px,100%);border:9px solid var(--bisel);border-radius:38px;overflow:hidden;
+  background:var(--a-papel);box-shadow:0 36px 60px -30px rgba(0,0,0,.55)}
+@media (min-width:960px){ .movil{width:min(318px,100%);border-width:10px;border-radius:42px} }
+.a-top{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:15px 15px 12px;background:var(--a-verde);color:var(--a-sobre)}
+.a-top b{font:700 11px/1 var(--f);letter-spacing:.22em}
+.a-top span{font:600 10px/1 var(--f);border:1px solid rgba(246,243,238,.45);border-radius:99px;padding:5px 9px}
+.a-body{display:grid;gap:10px;padding:11px}
+.a-card{background:var(--a-sup);border:1px solid var(--a-linea);border-radius:12px;padding:12px}
+.a-semana{display:none}
+@media (min-width:960px){ .a-semana{display:block} }
+.a-lbl{display:flex;justify-content:space-between;align-items:center;gap:8px;font:600 9.5px/1 var(--f);letter-spacing:.12em;text-transform:uppercase;color:var(--a-txt3)}
+.a-h{font:700 14.5px/1.28 var(--f);color:var(--a-tinta);margin:8px 0 9px}
+.a-row{display:flex;justify-content:space-between;gap:8px;font:12px/1.3 var(--f);color:var(--a-txt);padding:6px 0;border-top:1px solid var(--a-linea)}
+.a-row b{font-weight:600;color:var(--a-tinta)}
+.a-lista{font:11.5px/1.45 var(--f);color:var(--a-txt);padding:8px 0 11px;border-top:1px solid var(--a-linea)}
+.a-lista small{display:block;font:600 9px/1 var(--f);letter-spacing:.12em;text-transform:uppercase;color:var(--a-txt3);margin-bottom:5px}
+.a-btn{display:block;text-align:center;background:var(--a-verde);color:var(--a-sobre);border-radius:9px;font:600 12.5px/1 var(--f);padding:12px}
+.a-sem{display:grid;grid-template-columns:2.2rem minmax(0,1fr) auto;align-items:center;gap:8px;padding:7px 0;border-top:1px solid var(--a-linea);font:12px/1.3 var(--f);color:var(--a-tinta)}
+.a-sem:first-child{border-top:0}
+.a-sem i{font:600 9.5px/1 var(--f);font-style:normal;letter-spacing:.08em;text-transform:uppercase;color:var(--a-txt3)}
+.a-chip{display:inline-flex;align-items:center;gap:5px;font:600 8.5px/1 var(--f);letter-spacing:.08em;text-transform:uppercase;padding:4px 7px;border-radius:99px;white-space:nowrap}
+.a-chip::before{content:"";width:6px;height:6px;background:currentColor}
+.a-chip.r{color:var(--a-rojo);background:var(--a-rojo-s)}
+.a-chip.a{color:var(--a-ambar);background:var(--a-ambar-s)}
+.a-chip.a::before{clip-path:polygon(50% 0,100% 100%,0 100%)}
+.a-chip.v{color:var(--a-verde);background:var(--a-ok-s)}
+.a-chip.v::before{border-radius:50%}
+
+/* secciones */
+.sec{padding-block:clamp(52px,8vw,116px)}
+.sec + .sec{border-top:1px solid var(--linea)}
+.cols{display:grid;gap:28px}
+@media (min-width:960px){ .cols{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:80px;align-items:start} }
+h2{font-family:var(--f-d);font-weight:600;font-size:clamp(1.8rem,4.2vw,3.3rem);line-height:1.04;letter-spacing:-.005em;color:var(--tinta);margin:0;text-wrap:balance;max-width:20ch}
+h3{font-family:var(--f-d);font-weight:600;font-size:1.28rem;line-height:1.15;color:var(--tinta);margin:0;text-wrap:balance}
+@media (min-width:760px){ h3{font-size:1.4rem} }
+.lead{font-size:clamp(1rem,1.35vw,1.16rem);max-width:50ch;margin-top:14px;text-wrap:pretty}
+.frase{font-family:var(--f-d);font-weight:700;text-transform:uppercase;font-size:clamp(1.7rem,4.2vw,3.1rem);line-height:.96;color:var(--tinta);text-wrap:balance}
+.frase em{font-style:normal;color:var(--verde)}
+
+.chip{display:inline-flex;align-items:center;gap:6px;font:500 10.5px/1 var(--m);letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border-radius:99px;white-space:nowrap}
+.chip::before{content:"";width:7px;height:7px;background:currentColor;flex:0 0 auto}
+.chip.r{color:var(--rojo);background:var(--rojo-s)}
+.chip.a{color:var(--ambar);background:var(--ambar-s)}
+.chip.a::before{clip-path:polygon(50% 0,100% 100%,0 100%)}
+.chip.v{color:var(--ok);background:var(--ok-s)}
+.chip.v::before{border-radius:50%}
+
+/* el problema */
+.suma{margin-top:24px}
+.pills{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.pill{font:500 11.5px/1 var(--m);letter-spacing:.1em;text-transform:uppercase;color:var(--tinta);background:var(--sup);border:1px solid var(--linea-2);border-radius:99px;padding:9px 11px}
+.par{display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.mas{font:500 14px/1 var(--m);color:var(--txt-2)}
+.flecha{display:block;font:500 20px/1 var(--m);color:var(--verde);margin:14px 0 8px}
+.quien-decide{font-family:var(--f-d);font-weight:600;font-size:clamp(1.35rem,2.6vw,1.9rem);line-height:1.1;color:var(--tinta)}
+.suena-t{font:500 11.5px/1 var(--m);letter-spacing:.14em;text-transform:uppercase;color:var(--verde);margin:22px 0 4px}
+.suena{border-top:1px solid var(--linea-2)}
+.suena li{position:relative;padding:12px 0 12px 24px;border-bottom:1px solid var(--linea)}
+.suena li::before{content:"";position:absolute;left:0;top:1.35em;width:12px;height:2px;background:var(--verde)}
+
+/* el método */
+.pasos{border-top:1px solid var(--linea-2)}
+.paso{display:grid;grid-template-columns:2.2rem minmax(0,1fr);gap:14px;padding:20px 0;border-bottom:1px solid var(--linea)}
+@media (min-width:760px){ .paso{grid-template-columns:3.2rem minmax(0,1fr);gap:18px;padding:26px 0} }
+.paso-n{font-family:var(--f-d);font-weight:700;font-size:2rem;line-height:.85;color:var(--verde);font-variant-numeric:tabular-nums}
+@media (min-width:760px){ .paso-n{font-size:2.5rem} }
+.paso p{margin-top:6px;max-width:56ch}
+.etapas-t{font-size:14px;color:var(--txt-2);margin-top:12px}
+.etapas{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.etapas li{font:500 12px/1.2 var(--m);color:var(--tinta);background:var(--sup);border:1px solid var(--linea-2);border-radius:99px;padding:7px 10px}
+.dias{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;margin-top:14px;max-width:400px}
+.d{display:grid;justify-items:center;gap:5px}
+.d-l{font:500 11px/1 var(--m);color:var(--txt-2)}
+.d-m{width:100%;height:40px;border-radius:7px;display:grid;place-items:center}
+.d-m::before{content:"";width:10px;height:10px;background:currentColor}
+.d.r .d-m{background:var(--rojo-s);color:var(--rojo)}
+.d.a .d-m{background:var(--ambar-s);color:var(--ambar)}
+.d.a .d-m::before{clip-path:polygon(50% 0,100% 100%,0 100%);width:11px}
+.d.v .d-m{background:var(--ok-s);color:var(--ok)}
+.d.v .d-m::before{border-radius:50%}
+.d.l .d-m{background:var(--sunk);color:var(--txt-2)}
+.d.l .d-m::before{height:2px}
+.dias-cap{font-size:13.5px;color:var(--txt-2);margin-top:8px}
+
+/* personalización: comparación de dos perfiles */
+.comp{margin-top:26px;border-top:1px solid var(--linea-2)}
+.comp-fila{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:14px;padding:12px 0;border-bottom:1px solid var(--linea);font-size:14.5px;line-height:1.45;color:var(--txt)}
+.comp-cab{padding:14px 0;border-bottom-color:var(--linea-2)}
+.comp-cab b{display:block;font-family:var(--f-d);font-weight:600;font-size:1.55rem;line-height:1;color:var(--tinta)}
+.comp-cab small{display:block;font:500 10.5px/1.3 var(--m);letter-spacing:.08em;text-transform:uppercase;color:var(--verde);margin-top:6px}
+.comp-l{grid-column:1 / -1;display:flex;align-items:center;gap:8px;font:500 10.5px/1.2 var(--m);letter-spacing:.12em;text-transform:uppercase;color:var(--txt-2);margin-bottom:7px}
+.comp-cab .comp-vacia{display:none}
+.comp-fila b{font-weight:600;color:var(--tinta)}
+.peso{position:relative;display:inline-block;width:34px;height:6px;border-radius:3px;background:var(--sunk);overflow:hidden;flex:0 0 auto}
+.peso::after{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--w);border-radius:3px;background:var(--verde)}
+.mini li{display:grid;grid-template-columns:2rem 10px minmax(0,1fr);align-items:center;gap:6px;padding:4px 0}
+.mini i{font:500 10.5px/1 var(--m);font-style:normal;letter-spacing:.04em;text-transform:uppercase;color:var(--txt-2)}
+.mini em{display:block;width:9px;height:9px;background:var(--rojo)}
+.mini .a em{background:var(--ambar);clip-path:polygon(50% 0,100% 100%,0 100%);width:10px}
+.mini .v em{background:var(--ok);border-radius:50%}
+.mini span{color:var(--tinta)}
+@media (min-width:860px){
+  .comp-fila{grid-template-columns:11rem minmax(0,1fr) minmax(0,1fr);column-gap:32px;align-items:start;padding:16px 0;font-size:16px}
+  .comp-l{grid-column:auto;margin-bottom:0;padding-top:4px}
+  .comp-cab .comp-vacia{display:block}
+  .comp-cab b{font-size:1.9rem}
+}
+.remate{font-family:var(--f-d);font-weight:600;font-size:clamp(1.4rem,3.2vw,2.3rem);line-height:1.12;color:var(--tinta);margin-top:28px;max-width:34ch;text-wrap:balance}
+.remate em{font-style:normal;color:var(--verde)}
+.nota-ej{font-size:14px;color:var(--txt-2);margin-top:12px;max-width:58ch}
+
+/* seguimiento y app */
+.ciclo{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:22px}
+.ciclo li{font:500 12.5px/1 var(--m);color:var(--tinta);background:var(--verde-t);border-radius:99px;padding:9px 12px}
+.ciclo li.fin{background:var(--verde);color:var(--on-verde)}
+.ciclo .sep{background:none;padding:0;color:var(--txt-2)}
+.tendencia{margin-top:18px;max-width:44ch;font-size:1.02rem}
+.ej{justify-self:center;width:min(420px,100%);background:var(--a-sup);border:1px solid var(--a-linea);border-radius:16px;padding:16px;
+  box-shadow:0 26px 56px -34px rgba(20,24,20,.45)}
+@media (min-width:960px){ .ej{justify-self:end;margin-top:8px;padding:18px} }
+.ej-t{font:700 16.5px/1.2 var(--f);color:var(--a-tinta)}
+.ej-ds{font:12px/1.4 var(--m);color:var(--a-txt3);margin-top:5px}
+.ej-cue{font:13.5px/1.5 var(--f);color:var(--a-txt);margin-top:10px}
+.ej-ver{display:inline-block;margin-top:10px;font:600 12.5px/1 var(--f);color:var(--a-verde);border:1px solid var(--a-linea);border-radius:9px;padding:10px 12px}
+.sets{display:grid;gap:7px;margin-top:12px}
+.set{display:grid;grid-template-columns:1rem repeat(3,minmax(0,1fr)) 4.6rem;gap:5px;align-items:center}
+.set i{font:12px/1 var(--m);font-style:normal;color:var(--a-txt3);text-align:center}
+.set span{display:block;text-align:center;font:500 12.5px/1 var(--m);color:var(--a-tinta);background:var(--a-papel);border:1px solid var(--a-linea);border-radius:8px;padding:11px 2px}
+.set span.ph{color:var(--a-txt3);background:var(--a-sup);font-family:var(--f);font-weight:400}
+.set em{display:grid;place-items:center;height:35px;border-radius:8px;font:600 12px/1 var(--f);font-style:normal}
+.set em.hecho{background:var(--a-ok-s);color:var(--a-verde)}
+.set em.hecho::before{content:"";width:12px;height:6px;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-2px) rotate(-45deg)}
+.set em.reg{background:var(--a-verde);color:var(--a-sobre)}
+.feats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 18px;margin-top:36px;padding-top:24px;border-top:1px solid var(--linea-2)}
+@media (min-width:1040px){ .feats{grid-template-columns:repeat(4,minmax(0,1fr));gap:28px 36px;margin-top:64px;padding-top:30px} }
+.feat{font-size:14.5px;line-height:1.5}
+@media (min-width:760px){ .feat{font-size:16px} }
+.feat b{display:block;font:500 11px/1.3 var(--m);letter-spacing:.12em;text-transform:uppercase;color:var(--verde);margin-bottom:6px}
+.decide{margin-top:38px}
+@media (min-width:760px){ .decide{margin-top:64px} }
+
+/* quién */
+.quien-p{max-width:52ch;font-size:clamp(1rem,1.35vw,1.16rem)}
+.quien-p + .quien-p{margin-top:12px}
+.ig{margin-top:22px;font-size:15px;color:var(--txt-2)}
+.ig a{color:var(--verde);font-weight:600;text-underline-offset:4px;display:inline-block;padding-block:6px}
+
+/* solicitud */
+.solicitud{background:var(--sunk)}
+.sec + .solicitud{border-top:0}
+.form{background:var(--sup);border:1px solid var(--linea-2);border-radius:16px;padding:18px;margin-inline:-4px}
+@media (min-width:760px){ .form{padding:34px;border-radius:18px;margin-inline:0} }
+.campos{display:grid;gap:22px}
+.dos-campos{display:grid;gap:22px}
+@media (min-width:640px){ .dos-campos{grid-template-columns:minmax(0,1fr) minmax(0,1fr)} }
+.campo{display:grid;gap:8px;min-width:0}
+fieldset.campo{border:0;margin:0;padding:0}
+.campo > label,.campo legend{font-weight:600;font-size:15px;line-height:1.35;color:var(--tinta);padding:0}
+.opc{font-weight:400;color:var(--txt-2)}
+.ayuda{font-size:13.5px;color:var(--txt-2)}
+.in{width:100%;font:16px/1.4 var(--f);color:var(--tinta);background:var(--papel);border:1px solid var(--borde-campo);border-radius:10px;padding:13px 14px;min-height:48px}
+.in::placeholder{color:var(--txt-2);opacity:1}
+textarea.in{min-height:92px;resize:vertical}
+.in:focus-visible{outline:2px solid var(--verde);outline-offset:1px;border-color:transparent}
+.campo.mal .in{border-color:var(--rojo)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px}
+.op{position:relative;display:inline-flex}
+.op input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.op span{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid var(--borde-campo);border-radius:99px;background:var(--papel);color:var(--txt);font-size:15px}
+.op input:checked + span{background:var(--verde);border-color:var(--verde);color:var(--on-verde)}
+.op input:focus-visible + span{outline:2px solid var(--verde);outline-offset:2px}
+.campo.mal .op span{border-color:var(--rojo)}
+.err{font-size:13.5px;color:var(--rojo)}
+.metro{display:grid;gap:22px;border-top:1px dashed var(--linea-2);padding-top:22px}
+.check a,.hecho a{color:var(--verde);text-underline-offset:3px}
+.check{display:flex;gap:12px;align-items:flex-start;font-size:15px;color:var(--txt);padding-block:4px}
+.check input{width:22px;height:22px;margin:1px 0 0;accent-color:var(--verde);flex:0 0 auto}
+.trampa{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.enviar:disabled{opacity:.7;cursor:wait}
+.enviar{width:100%;min-height:54px;font-size:16px}
+.hecho{display:grid;gap:14px;justify-items:start}
+.hecho h3{font-size:1.8rem}
+.hecho .btn{width:100%}
+@media (min-width:600px){ .hecho .btn{width:auto} }
+.hecho .btn[aria-disabled="true"]{opacity:.55;cursor:not-allowed}
+.hecho .ayuda{font-family:var(--m);font-size:12px}
+
+/* preguntas */
+.faq{border-top:1px solid var(--linea-2)}
+.faq details{border-bottom:1px solid var(--linea)}
+.faq summary{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;min-height:56px;cursor:pointer;list-style:none;
+  font-family:var(--f-d);font-weight:600;font-size:1.2rem;line-height:1.2;color:var(--tinta)}
+@media (min-width:760px){ .faq summary{font-size:1.32rem;padding:22px 0} }
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font:400 1.5rem/1 var(--m);color:var(--verde);flex:0 0 auto}
+.faq details[open] summary::after{content:"–"}
+.faq details p{padding-bottom:18px;max-width:60ch}
+
+/* pie */
+.pie{background:var(--portada);color:var(--sobre)}
+.pie .wrap{display:grid;gap:26px;padding-block:44px calc(44px + env(safe-area-inset-bottom,0px))}
+@media (min-width:760px){ .pie .wrap{grid-template-columns:minmax(0,1fr) auto;align-items:end;padding-block:72px} }
+.pie .wm{color:var(--sobre)}
+.pie-lema{font-family:var(--f-d);font-weight:500;font-size:clamp(1.45rem,3vw,2.2rem);line-height:1.1;margin-top:12px;max-width:22ch;text-wrap:balance}
+.pie small{display:block;font:12px/1.6 var(--m);color:var(--sobre-2);margin-top:16px}
+.pie small a{color:var(--sobre);text-underline-offset:3px}
+.pie .btn{width:100%}
+@media (min-width:760px){ .pie .btn{width:auto} }
+
+/* botón fijo abajo, solo en el móvil */
+.barra-cta{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:10px var(--gutter) calc(10px + env(safe-area-inset-bottom,0px));
+  background:color-mix(in srgb,var(--papel) 94%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-top:1px solid var(--linea)}
+.barra-cta .btn{width:100%}
+@media (min-width:760px){ .barra-cta{display:none} }
+</style>
+
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="wm" href="#inicio">MÉTODO SALVA</a>
+    <nav class="nav" aria-label="Secciones">
+      <a href="#metodo" data-t="nav_metodo">El método</a>
+      <a href="#personal" data-t="nav_personal">Personalización</a>
+      <a href="#app" data-t="nav_app">Seguimiento</a>
+      <a href="#preguntas" data-t="nav_faq">Preguntas</a>
+    </nav>
+    <div class="top-acc">
+      <div class="lang" role="group" aria-label="Idioma / Language">
+        <button type="button" id="lang-es" aria-pressed="true">ES</button>
+        <button type="button" id="lang-en" aria-pressed="false">EN</button>
+      </div>
+      <a class="btn btn-p" href="#solicitud" data-t="cta_top">Hablar con Salva</a>
+    </div>
+  </div>
+</header>
+
+<main lang="es">
+
+<!-- portada -->
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div>
+      <p class="kick" data-t="h_kick">Estética y rendimiento</p>
+      <h1 data-t="h1">Tu físico y tu rendimiento no deberían competir.</h1>
+      <p class="lead" data-t="h_lead">El Método SALVA organiza fuerza, running, clases y HYROX alrededor de una prioridad clara, para mejorar tu físico mientras ganas capacidad atlética.</p>
+      <div class="hero-cta">
+        <a class="btn btn-inv" href="#solicitud" data-t="h_cta">Quiero organizar mi entrenamiento</a>
+        <a class="enlace" href="#problema" data-t="h_link">Descubrir el método</a>
+      </div>
+      <p class="nota" data-t="h_nota">Por ahora todo es personalizado: hablas directamente con Salva.</p>
+    </div>
+
+    <div class="movil" role="img" aria-label="Ejemplo de la app: la sesión de hoy" data-ta="m_aria">
+      <div aria-hidden="true">
+        <div class="a-top"><b>SALVA</b><span data-t="m_sem">Semana 3 de 11</span></div>
+        <div class="a-body">
+          <div class="a-card">
+            <p class="a-lbl"><span data-t="m_hoy">Hoy · Lunes</span><span class="a-chip r" data-t="c_r">Rojo</span></p>
+            <p class="a-h" data-t="m_titulo">Pierna fuerza · glúteo y posterior</p>
+            <p class="a-row"><span data-t="m_dur">Duración</span><b data-t="m_dur_v">unos 70 min</b></p>
+            <p class="a-lista"><small data-t="m_haces">Lo que haces</small><span data-t="m_lista">Hip thrust · Peso muerto rumano · Búlgara · Abducción</span></p>
+            <span class="a-btn" data-t="m_btn">Empezar sesión</span>
+          </div>
+          <div class="a-card a-semana">
+            <p class="a-lbl"><span data-t="m_semana">Tu semana</span></p>
+            <div style="margin-top:6px">
+              <p class="a-sem"><i data-t="m_d1">Lun</i><span data-t="m_s1">Pierna fuerza</span><span class="a-chip r" data-t="c_r">Rojo</span></p>
+              <p class="a-sem"><i data-t="m_d2">Mar</i><span data-t="m_s2">Upper body + Z2</span><span class="a-chip a" data-t="c_a">Ámbar</span></p>
+              <p class="a-sem"><i data-t="m_d3">Mié</i><span data-t="m_s3">Series de 3 min</span><span class="a-chip r" data-t="c_r">Rojo</span></p>
+              <p class="a-sem"><i data-t="m_d4">Jue</i><span data-t="m_s4">Z2 suave + movilidad</span><span class="a-chip v" data-t="c_v">Verde</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- el problema -->
+<section class="sec" id="problema">
+  <div class="wrap cols">
+    <div>
+      <p class="kick" data-t="pr_kick">El problema</p>
+      <h2 data-t="pr_h2">No entrenas poco. Entrenas sin una prioridad.</h2>
+      <div class="suma" role="img" aria-label="Fuerza, running, clases, HYROX, cardio y pierna sumados. ¿Quién decide qué va primero?" data-ta="pr_aria">
+        <div class="pills" aria-hidden="true">
+          <span class="pill" data-t="pl_fuerza">Fuerza</span>
+          <span class="par"><span class="mas">+</span><span class="pill">Running</span></span>
+          <span class="par"><span class="mas">+</span><span class="pill" data-t="pl_clases">Clases</span></span>
+          <span class="par"><span class="mas">+</span><span class="pill">HYROX</span></span>
+          <span class="par"><span class="mas">+</span><span class="pill">Cardio</span></span>
+          <span class="par"><span class="mas">+</span><span class="pill" data-t="pl_pierna">Pierna</span></span>
+        </div>
+        <span class="flecha" aria-hidden="true">↓</span>
+        <p class="quien-decide" aria-hidden="true" data-t="pr_quien">¿Quién decide qué va primero?</p>
+      </div>
+    </div>
+    <div>
+      <p class="lead" style="margin-top:0" data-t="pr_txt">Todo puede estar bien por separado. Pero cada sesión tira del mismo tiempo, de las mismas piernas y de la misma recuperación.</p>
+      <p class="suena-t" data-t="pr_suena">¿Te suena?</p>
+      <ul class="suena">
+        <li data-t="pr_2">Corres y haces fuerza, y las piernas siempre están cargadas.</li>
+        <li data-t="pr_3">Empiezas HYROX y lo único que cambia es que entrenas más.</li>
+        <li data-t="pr_4">Entrenas duro, pero no sabes qué intentas mejorar cada día.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- el método -->
+<section class="sec" id="metodo">
+  <div class="wrap cols">
+    <div>
+      <p class="kick" data-t="met_kick">El método</p>
+      <h2 data-t="met_h2">No empezamos por tu rutina. Empezamos por ti.</h2>
+    </div>
+    <ol class="pasos">
+      <li class="paso"><span class="paso-n">1</span><div><h3 data-t="s1_h">Entender</h3><p data-t="s1_p">Tu objetivo, tu experiencia, tus días y lo que ya entrenas.</p></div></li>
+      <li class="paso"><span class="paso-n">2</span><div>
+        <h3 data-t="s2_h">Priorizar</h3>
+        <p data-t="s2_p">Decidimos qué recibe más atención en esta etapa.</p>
+        <p class="etapas-t" data-t="etapas_t">Según la etapa, la prioridad puede ser:</p>
+        <ul class="etapas">
+          <li data-t="e1">Estética primero</li><li data-t="e2">Estética y rendimiento</li><li data-t="e3">Equilibrio</li><li data-t="e4">Una competición</li>
+        </ul>
+      </div></li>
+      <li class="paso"><span class="paso-n">3</span><div>
+        <h3 data-t="s3_h">Organizar</h3>
+        <p data-t="s3_p">Todo en una misma semana, para que el running del martes no arruine lo que queríamos mejorar el miércoles.</p>
+        <div class="dias" role="img" aria-label="Ejemplo de semana: lunes rojo, martes ámbar, miércoles rojo, jueves verde, viernes ámbar, sábado rojo y domingo libre" data-ta="dias_aria">
+          <div class="d r" aria-hidden="true"><span class="d-l" data-t="dl1">L</span><span class="d-m"></span></div>
+          <div class="d a" aria-hidden="true"><span class="d-l" data-t="dl2">M</span><span class="d-m"></span></div>
+          <div class="d r" aria-hidden="true"><span class="d-l" data-t="dl3">X</span><span class="d-m"></span></div>
+          <div class="d v" aria-hidden="true"><span class="d-l" data-t="dl4">J</span><span class="d-m"></span></div>
+          <div class="d a" aria-hidden="true"><span class="d-l" data-t="dl5">V</span><span class="d-m"></span></div>
+          <div class="d r" aria-hidden="true"><span class="d-l" data-t="dl6">S</span><span class="d-m"></span></div>
+          <div class="d l" aria-hidden="true"><span class="d-l" data-t="dl7">D</span><span class="d-m"></span></div>
+        </div>
+        <p class="dias-cap" data-t="dias_cap">Cada sesión con su intensidad: roja, ámbar o verde.</p>
+      </div></li>
+      <li class="paso"><span class="paso-n">4</span><div><h3 data-t="s4_h">Ajustar</h3><p data-t="s4_p">Lo que registras decide cuándo progresar, mantener o cambiar.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- personalización -->
+<section class="sec" id="personal">
+  <div class="wrap">
+    <p class="kick" data-t="per_kick">Personalización</p>
+    <h2 data-t="per_h2">Mismo objetivo. Distinta semana.</h2>
+    <p class="lead" data-t="per_lead">Un ejemplo: Laura y Marta quieren lo mismo, <b>más glúteo y su primer HYROX</b>, y las dos pueden entrenar 4 días a la semana.</p>
+
+    <div class="comp" role="table" aria-label="Comparación de dos perfiles de ejemplo" data-ta="comp_aria">
+      <div class="comp-fila comp-cab" role="row">
+        <span class="comp-l comp-vacia" role="columnheader"></span>
+        <span role="columnheader"><b>Laura</b><small data-t="la_de">Viene del gimnasio</small></span>
+        <span role="columnheader"><b>Marta</b><small data-t="ma_de">Viene del running</small></span>
+      </div>
+      <div class="comp-fila" role="row">
+        <span class="comp-l" role="rowheader"><span data-t="f_partida">Punto de partida</span></span>
+        <span role="cell" data-t="la_partida">3 años de fuerza. Nunca ha corrido más de 20 minutos.</span>
+        <span role="cell" data-t="ma_partida">Corre 10 km sin problema. Casi nunca ha hecho fuerza.</span>
+      </div>
+      <div class="comp-fila" role="row">
+        <span class="comp-l" role="rowheader"><i class="peso" style="--w:100%" aria-hidden="true"></i><span data-t="f_des">Desarrollar</span></span>
+        <span role="cell"><b data-t="la_des">Carrera y motor</b></span>
+        <span role="cell"><b data-t="ma_des">Glúteo y fuerza</b></span>
+      </div>
+      <div class="comp-fila" role="row">
+        <span class="comp-l" role="rowheader"><i class="peso" style="--w:55%" aria-hidden="true"></i><span data-t="f_man">Mantener</span></span>
+        <span role="cell" data-t="la_man">Glúteo, con un día fuerte de pierna</span>
+        <span role="cell" data-t="ma_man">Carrera, de 3 días a 2</span>
+      </div>
+      <div class="comp-fila" role="row">
+        <span class="comp-l" role="rowheader"><i class="peso" style="--w:30%" aria-hidden="true"></i><span data-t="f_int">Introducir</span></span>
+        <span role="cell" data-t="la_int">Estaciones de HYROX</span>
+        <span role="cell" data-t="ma_int">Estaciones de HYROX, desde el 2.º mes</span>
+      </div>
+      <div class="comp-fila" role="row">
+        <span class="comp-l" role="rowheader"><i class="peso" style="--w:14%" aria-hidden="true"></i><span data-t="f_red">Reducir</span></span>
+        <span role="cell" data-t="la_red">Accesorios que sobran</span>
+        <span role="cell" data-t="ma_red">Correr rápido todos los días</span>
+      </div>
+      <div class="comp-fila" role="row">
+        <span class="comp-l" role="rowheader"><span data-t="f_semana">Su semana</span></span>
+        <div role="cell"><ul class="mini">
+          <li class="r"><i data-t="d_lun">Lun</i><em></em><span data-t="la_s1">Pierna y glúteo</span></li>
+          <li class="v"><i data-t="d_mar">Mar</i><em></em><span data-t="la_s2">Carrera suave</span></li>
+          <li class="a"><i data-t="d_jue">Jue</i><em></em><span data-t="la_s3">Estaciones de HYROX</span></li>
+          <li class="r"><i data-t="d_sab">Sáb</i><em></em><span data-t="la_s4">Intervalos</span></li>
+        </ul></div>
+        <div role="cell"><ul class="mini">
+          <li class="r"><i data-t="d_lun">Lun</i><em></em><span data-t="ma_s1">Glúteo · fuerza</span></li>
+          <li class="v"><i data-t="d_mar">Mar</i><em></em><span data-t="ma_s2">Carrera suave</span></li>
+          <li class="r"><i data-t="d_jue">Jue</i><em></em><span data-t="ma_s3">Glúteo · volumen</span></li>
+          <li class="a"><i data-t="d_sab">Sáb</i><em></em><span data-t="ma_s4">Carrera de calidad</span></li>
+        </ul></div>
+      </div>
+    </div>
+    <p class="remate" data-t="per_remate">Laura construye motor sin perder glúteo. <em>Marta, glúteo sin dejar de correr.</em></p>
+    <p class="nota-ej" data-t="per_nota">Es un ejemplo. Con cualquier otro objetivo el proceso es el mismo: cambian las prioridades y cambia la semana.</p>
+  </div>
+</section>
+
+<!-- seguimiento y app -->
+<section class="sec" id="app">
+  <div class="wrap cols">
+    <div>
+      <p class="kick" data-t="app_kick">Seguimiento y app</p>
+      <h2 data-t="app_h2">Tu programa no se entrega y desaparece.</h2>
+      <ol class="ciclo" aria-label="Entrenas, lo registras en la app, lo revisamos y ajustamos" data-ta="ciclo_aria">
+        <li data-t="ci2">Entrenas</li><li class="sep" aria-hidden="true">→</li>
+        <li data-t="ci3">Registras en la app</li><li class="sep" aria-hidden="true">→</li>
+        <li data-t="ci4">Revisamos</li><li class="sep" aria-hidden="true">→</li>
+        <li class="fin" data-t="ci5">Ajustamos</li>
+      </ol>
+      <p class="tendencia" data-t="app_tend">Una mala sesión no cambia el programa. Una tendencia, sí.</p>
+    </div>
+    <div class="ej" role="img" aria-label="Ejemplo de un ejercicio en la app con dos series registradas" data-ta="ej_aria">
+      <div aria-hidden="true">
+        <p class="ej-t">Hip thrust</p>
+        <p class="ej-ds" data-t="ej_ds">4 × 8-10 · RIR 2 · Descanso 2 min</p>
+        <p class="ej-cue" data-t="ej_cue">Empuja con los talones y bloquea arriba sin arquear la zona lumbar.</p>
+        <span class="ej-ver" data-t="ej_ver">Ver cómo se hace</span>
+        <div class="sets">
+          <div class="set"><i>1</i><span>10</span><span>80 kg</span><span>RIR 2</span><em class="hecho"></em></div>
+          <div class="set"><i>2</i><span>10</span><span>80 kg</span><span>RIR 2</span><em class="hecho"></em></div>
+          <div class="set"><i>3</i><span class="ph">reps</span><span class="ph">kg</span><span class="ph">RIR</span><em class="reg" data-t="ej_reg">Registrar</em></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <ul class="feats">
+      <li class="feat"><b data-t="f1_b">Hoy toca</b><span data-t="f1_p">La sesión del día y su intensidad.</span></li>
+      <li class="feat"><b data-t="f2_b">Registro</b><span data-t="f2_p">Series, kilos y RIR, o kilómetros y tiempo.</span></li>
+      <li class="feat"><b data-t="f3_b">Técnica</b><span data-t="f3_p">El vídeo de cada ejercicio, y Salva revisa el tuyo.</span></li>
+      <li class="feat"><b data-t="f4_b">Check-in</b><span data-t="f4_p">Cada semana: cómo vas y qué cambia.</span></li>
+    </ul>
+    <p class="frase decide" data-t="app_frase">El plan propone. <em>Tu respuesta decide.</em></p>
+  </div>
+</section>
+
+<!-- quién -->
+<section class="sec" id="salva">
+  <div class="wrap cols">
+    <div>
+      <p class="kick" data-t="sal_kick">Quién hay detrás</p>
+      <h2 data-t="sal_h2">Creado por Salvador Martínez.</h2>
+    </div>
+    <div>
+      <p class="quien-p" data-t="sal_p1">Entrenamiento personal especializado en combinar físico y rendimiento, construido sobre evidencia y ajustado con el seguimiento de cada persona.</p>
+      <p class="quien-p" data-t="sal_p2">El método nace de ver que a la mayoría no le faltaba esfuerzo: le faltaba organización.</p>
+      <p class="ig"><span data-t="ig_txt">El día a día, en Instagram:</span> <a href="https://www.instagram.com/salva.trainer/" target="_blank" rel="noopener">@salva.trainer</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- solicitud -->
+<section class="sec solicitud" id="solicitud">
+  <div class="wrap cols">
+    <div>
+      <p class="kick" data-t="sol_kick">Hablar con Salva</p>
+      <h2 data-t="sol_h2">Cuéntame qué estás entrenando.</h2>
+      <p class="lead" data-t="sol_lead">Dos minutos. Al enviarlo, eliges hueco para la llamada.</p>
+    </div>
+
+    <form class="form" id="form-solicitud" novalidate>
+      <div class="campos" id="campos">
+        <div class="campo" id="c-nombre">
+          <label for="f-nombre" data-t="l_nombre">Nombre y apellidos</label>
+          <input class="in" id="f-nombre" name="nombre" type="text" autocomplete="name" aria-describedby="e-nombre">
+          <p class="err" id="e-nombre" hidden></p>
+        </div>
+        <div class="dos-campos">
+          <div class="campo" id="c-email">
+            <label for="f-email" data-t="l_email">Email</label>
+            <input class="in" id="f-email" name="email" type="email" autocomplete="email" inputmode="email" aria-describedby="e-email">
+            <p class="err" id="e-email" hidden></p>
+          </div>
+          <div class="campo" id="c-tel">
+            <label for="f-tel" data-t="l_tel">WhatsApp o teléfono</label>
+            <input class="in" id="f-tel" name="telefono" type="tel" autocomplete="tel" inputmode="tel" aria-describedby="e-tel">
+            <p class="err" id="e-tel" hidden></p>
+          </div>
+        </div>
+        <div class="dos-campos">
+          <div class="campo" id="c-ciudad">
+            <label for="f-ciudad" data-t="l_ciudad">¿En qué ciudad vives?</label>
+            <input class="in" id="f-ciudad" name="ciudad" type="text" autocomplete="address-level2" placeholder="Ej.: Madrid" data-tp="ph_ciudad" aria-describedby="e-ciudad">
+            <p class="err" id="e-ciudad" hidden></p>
+          </div>
+          <div class="campo">
+            <label for="f-ig"><span data-t="l_ig">Instagram</span> <span class="opc" data-t="opc">(opcional)</span></label>
+            <input class="in" id="f-ig" name="instagram" type="text" autocomplete="off" placeholder="@usuario" data-tp="ph_ig">
+          </div>
+        </div>
+
+        <fieldset class="campo" id="c-actual" aria-describedby="h-actual e-actual">
+          <legend data-t="l_actual">¿Qué entrenas ahora mismo?</legend>
+          <div class="chips">
+            <label class="op"><input type="checkbox" id="f-act-fuerza" name="actual" value="fuerza"><span data-t="pl_fuerza">Fuerza</span></label>
+            <label class="op"><input type="checkbox" id="f-act-running" name="actual" value="running"><span>Running</span></label>
+            <label class="op"><input type="checkbox" id="f-act-clases" name="actual" value="clases"><span data-t="pl_clases">Clases</span></label>
+            <label class="op"><input type="checkbox" id="f-act-hyrox" name="actual" value="hyrox"><span>HYROX</span></label>
+            <label class="op"><input type="checkbox" id="f-act-cardio" name="actual" value="cardio"><span>Cardio</span></label>
+            <label class="op"><input type="checkbox" id="f-act-otro" name="actual" value="otro_deporte"><span data-t="a_otro">Otro deporte</span></label>
+            <label class="op"><input type="checkbox" id="f-act-nada" name="actual" value="nada_todavia"><span data-t="a_nada">Nada todavía</span></label>
+          </div>
+          <p class="ayuda" id="h-actual" data-t="h_actual">Marca todo lo que hagas.</p>
+          <p class="err" id="e-actual" hidden></p>
+        </fieldset>
+
+        <fieldset class="campo" id="c-objetivo" aria-describedby="h-obj e-objetivo">
+          <legend data-t="l_obj">¿Qué quieres trabajar?</legend>
+          <div class="chips">
+            <label class="op"><input type="radio" id="f-obj-estetica" name="objetivo" value="estetica"><span data-t="o_est">Estética</span></label>
+            <label class="op"><input type="radio" id="f-obj-rendimiento" name="objetivo" value="rendimiento"><span data-t="o_ren">Rendimiento</span></label>
+            <label class="op"><input type="radio" id="f-obj-ambos" name="objetivo" value="ambas"><span data-t="o_ambos">Las dos cosas</span></label>
+          </div>
+          <p class="ayuda" id="h-obj" data-t="h_obj">Estética: glúteo y físico. Rendimiento: HYROX, running o fuerza.</p>
+          <p class="err" id="e-objetivo" hidden></p>
+        </fieldset>
+
+        <fieldset class="campo" id="c-dias" aria-describedby="e-dias">
+          <legend data-t="l_dias">¿Cuántos días puedes entrenar a la semana?</legend>
+          <div class="chips">
+            <label class="op"><input type="radio" id="f-dias-3" name="dias" value="2-3"><span>2–3</span></label>
+            <label class="op"><input type="radio" id="f-dias-4" name="dias" value="4"><span>4</span></label>
+            <label class="op"><input type="radio" id="f-dias-5" name="dias" value="5"><span>5</span></label>
+            <label class="op"><input type="radio" id="f-dias-6" name="dias" value="6+"><span data-t="d_6">6 o más</span></label>
+          </div>
+          <p class="err" id="e-dias" hidden></p>
+        </fieldset>
+
+        <div class="campo">
+          <label for="f-fecha"><span data-t="l_fecha">¿Tienes alguna competición con fecha?</span> <span class="opc" data-t="opc">(opcional)</span></label>
+          <input class="in" id="f-fecha" name="competicion" type="text" autocomplete="off" placeholder="Ej.: HYROX Barcelona, 11 de noviembre" data-tp="ph_fecha">
+        </div>
+
+        <div class="metro">
+          <fieldset class="campo" id="c-m1" aria-describedby="e-m1">
+            <legend data-t="l_m1">¿Eres socio o socia del club Metropolitan?</legend>
+            <div class="chips">
+              <label class="op"><input type="radio" id="f-m1-si" name="socio_metropolitan" value="si"><span data-t="si">Sí</span></label>
+              <label class="op"><input type="radio" id="f-m1-no" name="socio_metropolitan" value="no"><span>No</span></label>
+            </div>
+            <p class="err" id="e-m1" hidden></p>
+          </fieldset>
+          <fieldset class="campo" id="c-m2" aria-describedby="e-m2" hidden>
+            <legend data-t="l_m2">¿Has sido socio o socia del club Metropolitan alguna vez?</legend>
+            <div class="chips">
+              <label class="op"><input type="radio" id="f-m2-si" name="fue_socio_metropolitan" value="si"><span data-t="si">Sí</span></label>
+              <label class="op"><input type="radio" id="f-m2-no" name="fue_socio_metropolitan" value="no"><span>No</span></label>
+            </div>
+            <p class="err" id="e-m2" hidden></p>
+          </fieldset>
+          <fieldset class="campo" id="c-m3" aria-describedby="e-m3" hidden>
+            <legend data-t="l_m3">¿Tienes pensado hacerte socio o socia del club Metropolitan?</legend>
+            <div class="chips">
+              <label class="op"><input type="radio" id="f-m3-si" name="planea_socio_metropolitan" value="si"><span data-t="si">Sí</span></label>
+              <label class="op"><input type="radio" id="f-m3-no" name="planea_socio_metropolitan" value="no"><span>No</span></label>
+              <label class="op"><input type="radio" id="f-m3-nose" name="planea_socio_metropolitan" value="no_lo_se"><span data-t="nose">No lo sé</span></label>
+            </div>
+            <p class="err" id="e-m3" hidden></p>
+          </fieldset>
+        </div>
+
+        <div class="campo">
+          <label for="f-mas"><span data-t="l_mas">¿Algo más que quieras contar?</span> <span class="opc" data-t="opc">(opcional)</span></label>
+          <textarea class="in" id="f-mas" name="mensaje" rows="3" aria-describedby="h-mas"></textarea>
+          <p class="ayuda" id="h-mas" data-t="h_mas">No hace falta contar temas de salud aquí: eso va en la valoración.</p>
+        </div>
+
+        <div class="campo" id="c-ok">
+          <label class="check" for="f-ok"><input type="checkbox" id="f-ok" name="privacidad" aria-describedby="e-ok"><span data-t="l_ok">He leído la <a href="privacidad.html" target="_blank" rel="noopener">política de privacidad</a>.</span></label>
+          <p class="err" id="e-ok" hidden></p>
+        </div>
+
+        <div class="trampa" aria-hidden="true"><label for="f-web">Web</label><input id="f-web" name="web" type="text" tabindex="-1" autocomplete="off"></div>
+        <p class="err" id="e-envio" role="alert" hidden></p>
+        <button class="btn btn-p enviar" type="submit" id="f-enviar" data-t="enviar">Enviar y elegir hueco</button>
+      </div>
+
+      <div class="hecho" id="hecho" hidden>
+        <h3 id="hecho-h" tabindex="-1">Recibido.</h3>
+        <p id="hecho-p" data-t="hecho_p">Ahora elige un hueco para hablar con Salva.</p>
+        <p id="hecho-sin" data-t="hecho_sin" hidden>Salva te escribirá para agendar la llamada. Si no tienes noticias, escribe a <a href="https://www.instagram.com/salva.trainer/" target="_blank" rel="noopener">@salva.trainer</a> en Instagram.</p>
+        <a class="btn btn-p" id="agenda" href="#solicitud" data-t="agenda" hidden>Elegir hueco</a>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- preguntas -->
+<section class="sec" id="preguntas">
+  <div class="wrap cols">
+    <div>
+      <p class="kick" data-t="faq_kick">Preguntas</p>
+      <h2 data-t="faq_h2">Lo que suele preguntarse.</h2>
+    </div>
+    <div class="faq">
+      <details><summary data-t="q1">¿Cuánto cuesta?</summary><p data-t="a1">Cada plan es personalizado, así que depende de lo que necesites. Se habla en la llamada.</p></details>
+      <details><summary data-t="q5">¿Qué pasa después de la llamada?</summary><p data-t="a5">Si el método encaja contigo, haces una valoración completa y a partir de ahí se construye tu plan.</p></details>
+      <details><summary data-t="q2">¿Necesito experiencia?</summary><p data-t="a2">No. La valoración mide desde dónde partes y el plan empieza ahí.</p></details>
+      <details><summary data-t="q3">¿Y si tengo una lesión o estoy en posparto?</summary><p data-t="a3">Se tiene en cuenta desde la valoración, y el plan se adapta a lo que te hayan indicado.</p></details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="pie" id="pie">
+  <div class="wrap">
+    <div>
+      <p class="wm">MÉTODO SALVA</p>
+      <p class="pie-lema" data-t="lema">El descanso y la comida también entrenan.</p>
+      <small>© 2026 Método SALVA · <a href="https://www.instagram.com/salva.trainer/" target="_blank" rel="noopener">Instagram @salva.trainer</a> · <a href="privacidad.html" data-t="pie_legal">Privacidad y aviso legal</a></small>
+    </div>
+    <a class="btn btn-inv" href="#solicitud" data-t="cta_top">Hablar con Salva</a>
+  </div>
+</footer>
+
+<div class="barra-cta" id="barra-cta" hidden>
+  <a class="btn btn-p" href="#solicitud" data-t="cta_top">Hablar con Salva</a>
+</div>
+
+<script>
+(function () {
+  /* Pendiente al publicar: la dirección del script que guarda las solicitudes y el enlace de la agenda. */
+  var ENVIO = 'https://script.google.com/macros/s/AKfycbww-OyEj7tAJtflwOKKzlSiUhui-jwysPgOeuT694x-LgngvUjVVnJAxfS9i7ffD-qRXA/exec';
+  var AGENDA = '';
+
+  var EN = {
+    nav_metodo: 'The method', nav_personal: 'Personalisation', nav_app: 'Follow-up', nav_faq: 'Questions', cta_top: 'Talk to Salva',
+    h_kick: 'Aesthetics and performance',
+    h1: 'Your physique and your performance shouldn’t compete.',
+    h_lead: 'Método SALVA organises strength, running, classes and HYROX around one clear priority, to improve your physique while you build athletic capacity.',
+    h_cta: 'I want to organise my training', h_link: 'Discover the method',
+    h_nota: 'Everything is one-to-one for now: you talk to Salva directly.',
+    m_aria: 'Example of the app: today’s session',
+    m_sem: 'Week 3 of 11', m_hoy: 'Today · Monday', m_titulo: 'Lower body strength · glutes and posterior chain',
+    m_dur: 'Duration', m_dur_v: 'about 70 min', m_haces: 'What you’re doing',
+    m_lista: 'Hip thrust · Romanian deadlift · Bulgarian split squat · Abduction', m_btn: 'Start session',
+    m_semana: 'Your week', m_d1: 'Mon', m_s1: 'Lower body strength', m_d2: 'Tue', m_s2: 'Upper body + Z2',
+    m_d3: 'Wed', m_s3: '3-min intervals', m_d4: 'Thu', m_s4: 'Easy Z2 + mobility',
+    c_r: 'Red', c_a: 'Amber', c_v: 'Green',
+    pr_kick: 'The problem', pr_h2: 'You don’t train too little. You train without a priority.',
+    pr_aria: 'Strength, running, classes, HYROX, cardio and legs added together. Who decides what comes first?',
+    pl_fuerza: 'Strength', pl_clases: 'Classes', pl_pierna: 'Legs', pr_quien: 'Who decides what comes first?',
+    pr_txt: 'Each piece can be fine on its own. But every session draws on the same time, the same legs and the same recovery.',
+    pr_suena: 'Sound familiar?',
+    pr_2: 'You run and lift, and your legs are always heavy.',
+    pr_3: 'You start HYROX and the only thing that changes is that you train more.',
+    pr_4: 'You train hard, but you don’t know what each day is meant to improve.',
+    met_kick: 'The method', met_h2: 'We don’t start with your routine. We start with you.',
+    s1_h: 'Understand', s1_p: 'Your goal, your experience, your days and what you already train.',
+    s2_h: 'Prioritise', s2_p: 'We decide what gets the most attention in this phase.',
+    etapas_t: 'Depending on the phase, the priority can be:',
+    e1: 'Aesthetics first', e2: 'Aesthetics and performance', e3: 'Balance', e4: 'A race',
+    s3_h: 'Organise', s3_p: 'Everything in one week, so Tuesday’s run doesn’t ruin what we wanted to improve on Wednesday.',
+    dias_aria: 'Example week: Monday red, Tuesday amber, Wednesday red, Thursday green, Friday amber, Saturday red and Sunday off',
+    dl1: 'M', dl2: 'T', dl3: 'W', dl4: 'T', dl5: 'F', dl6: 'S', dl7: 'S',
+    dias_cap: 'Every session with its intensity: red, amber or green.',
+    s4_h: 'Adjust', s4_p: 'What you log decides when to progress, hold or change.',
+    per_kick: 'Personalisation', per_h2: 'Same goal. Different week.',
+    per_lead: 'An example: Laura and Marta want the same thing, <b>more glutes and their first HYROX</b>, and both can train 4 days a week.',
+    comp_aria: 'Comparison of two example profiles',
+    la_de: 'Comes from the gym', ma_de: 'Comes from running',
+    f_partida: 'Starting point', f_des: 'Develop', f_man: 'Maintain', f_int: 'Introduce', f_red: 'Reduce', f_semana: 'Her week',
+    la_partida: '3 years of strength training. Has never run for more than 20 minutes.',
+    ma_partida: 'Runs 10 km with no trouble. Has hardly ever done strength work.',
+    la_des: 'Running and engine', ma_des: 'Glutes and strength',
+    la_man: 'Glutes, with one hard leg day', ma_man: 'Running, from 3 days to 2',
+    la_int: 'HYROX stations', ma_int: 'HYROX stations, from month 2',
+    la_red: 'Extra accessory work', ma_red: 'Running hard every day',
+    d_lun: 'Mon', d_mar: 'Tue', d_jue: 'Thu', d_sab: 'Sat',
+    la_s1: 'Legs and glutes', la_s2: 'Easy run', la_s3: 'HYROX stations', la_s4: 'Intervals',
+    ma_s1: 'Glutes · strength', ma_s2: 'Easy run', ma_s3: 'Glutes · volume', ma_s4: 'Quality run',
+    per_remate: 'Laura builds her engine without losing glutes. <em>Marta builds glutes without giving up running.</em>',
+    per_nota: 'It’s an example. With any other goal the process is the same: the priorities change, and so does the week.',
+    app_kick: 'Follow-up and app', app_h2: 'Your programme isn’t handed over and forgotten.',
+    ciclo_aria: 'You train, you log it in the app, we review it and we adjust',
+    ci2: 'You train', ci3: 'You log it in the app', ci4: 'We review', ci5: 'We adjust',
+    app_tend: 'One bad session doesn’t change the programme. A trend does.',
+    ej_aria: 'Example of an exercise in the app with two sets logged',
+    ej_ds: '4 × 8-10 · RIR 2 · Rest 2 min',
+    ej_cue: 'Drive through your heels and lock out at the top without arching your lower back.',
+    ej_ver: 'See how it’s done', ej_reg: 'Log',
+    f1_b: 'Today', f1_p: 'Today’s session and how hard it is.',
+    f2_b: 'Logging', f2_p: 'Sets, kilos and RIR, or kilometres and time.',
+    f3_b: 'Technique', f3_p: 'A video for every exercise, and Salva reviews yours.',
+    f4_b: 'Check-in', f4_p: 'Every week: how you’re doing and what changes.',
+    app_frase: 'The plan proposes. <em>Your response decides.</em>',
+    sal_kick: 'Who’s behind it', sal_h2: 'Created by Salvador Martínez.',
+    sal_p1: 'Personal training specialised in combining physique and performance, built on evidence and adjusted through each person’s follow-up.',
+    sal_p2: 'The method was born from seeing that most people didn’t lack effort: they lacked organisation.',
+    ig_txt: 'Day to day, on Instagram:',
+    sol_kick: 'Talk to Salva', sol_h2: 'Tell me what you’re training.',
+    sol_lead: 'Two minutes. Once you send it, you pick a time for the call.',
+    l_nombre: 'Full name', l_email: 'Email', l_tel: 'WhatsApp or phone',
+    l_ciudad: 'Which city do you live in?', ph_ciudad: 'e.g. Madrid',
+    l_ig: 'Instagram', opc: '(optional)', ph_ig: '@username',
+    l_actual: 'What are you training right now?', a_otro: 'Another sport', a_nada: 'Nothing yet', h_actual: 'Tick everything you do.',
+    l_obj: 'What do you want to work on?', o_est: 'Aesthetics', o_ren: 'Performance', o_ambos: 'Both',
+    h_obj: 'Aesthetics: glutes and physique. Performance: HYROX, running or strength.',
+    l_dias: 'How many days a week can you train?', d_6: '6 or more',
+    l_fecha: 'Do you have a race or event with a date?', ph_fecha: 'e.g. HYROX Barcelona, 11 November',
+    l_m1: 'Are you a member of the Metropolitan club?', l_m2: 'Have you ever been a member of the Metropolitan club?',
+    l_m3: 'Are you planning to join the Metropolitan club?', si: 'Yes', nose: 'Not sure',
+    l_mas: 'Anything else you’d like to tell us?', h_mas: 'No need to share health details here: those come in the assessment.',
+    l_ok: 'I have read the <a href="privacidad.html#en" target="_blank" rel="noopener">privacy policy</a>.', enviar: 'Send and pick a time',
+    hecho_p: 'Now pick a time to talk to Salva.', agenda: 'Pick a time',
+    hecho_sin: 'Salva will get in touch to book the call. If you don’t hear back, message <a href="https://www.instagram.com/salva.trainer/" target="_blank" rel="noopener">@salva.trainer</a> on Instagram.',
+    enviar_sin: 'Send request', sol_lead_sin: 'Two minutes. Then Salva gets in touch to book the call.',
+    faq_kick: 'Questions', faq_h2: 'What people usually ask.',
+    q1: 'How much does it cost?', a1: 'Every plan is personalised, so it depends on what you need. It’s covered on the call.',
+    q5: 'What happens after the call?', a5: 'If the method fits you, you do a full assessment and your plan is built from there.',
+    q2: 'Do I need experience?', a2: 'No. The assessment measures where you’re starting from, and the plan starts there.',
+    q3: 'What if I have an injury or I’m postpartum?', a3: 'It’s taken into account from the assessment, and the plan adapts to whatever you’ve been advised.',
+    lema: 'Rest and food are training too.',
+    pie_legal: 'Privacy and legal notice'
+  };
+  var MSG = {
+    es: { nombre: 'Escribe tu nombre.', email: 'Escribe un email válido, por ejemplo nombre@correo.com.',
+          tel: 'Déjanos un teléfono para que Salva pueda llamarte.', ciudad: 'Escribe tu ciudad.', radio: 'Elige una opción.',
+          varias: 'Marca al menos una opción.', ok: 'Marca la casilla para confirmar que has leído la política de privacidad.', hecho: 'Recibido, {n}.',
+          envio: 'No se ha podido enviar. Revisa tu conexión e inténtalo otra vez.', enviando: 'Enviando…' },
+    en: { nombre: 'Add your name.', email: 'Enter a valid email, for example name@mail.com.',
+          tel: 'Add a phone number so Salva can call you.', ciudad: 'Add your city.', radio: 'Pick an option.',
+          varias: 'Tick at least one option.', ok: 'Tick the box to confirm you have read the privacy policy.', hecho: 'Got it, {n}.',
+          envio: 'It couldn’t be sent. Check your connection and try again.', enviando: 'Sending…' }
+  };
+
+  /* Sin enlace de reservas todavia, el formulario no promete elegir hueco. */
+  if (!AGENDA) {
+    var bEnv = document.getElementById('f-enviar');
+    bEnv.dataset.t = 'enviar_sin';
+    bEnv.textContent = 'Enviar solicitud';
+    var entradilla = document.querySelector('[data-t="sol_lead"]');
+    entradilla.dataset.t = 'sol_lead_sin';
+    entradilla.textContent = 'Dos minutos. Después, Salva te escribe para agendar la llamada.';
+  }
+  var nombreHecho = '';
+
+  /* ---------- idioma ---------- */
+  var ES = {}, ESP = {}, ESA = {};
+  var textos = document.querySelectorAll('[data-t]');
+  var phs = document.querySelectorAll('[data-tp]');
+  var arias = document.querySelectorAll('[data-ta]');
+  textos.forEach(function (el) { if (!(el.dataset.t in ES)) ES[el.dataset.t] = el.innerHTML; });
+  phs.forEach(function (el) { ESP[el.dataset.tp] = el.getAttribute('placeholder'); });
+  arias.forEach(function (el) { ESA[el.dataset.ta] = el.getAttribute('aria-label'); });
+  var idioma = 'es';
+
+  function ponIdioma(l) {
+    idioma = l === 'en' ? 'en' : 'es';
+    var en = idioma === 'en';
+    textos.forEach(function (el) { var k = el.dataset.t; var v = en ? EN[k] : ES[k]; if (v != null) el.innerHTML = v; });
+    phs.forEach(function (el) { var k = el.dataset.tp; el.setAttribute('placeholder', en ? EN[k] : ESP[k]); });
+    arias.forEach(function (el) { var k = el.dataset.ta; el.setAttribute('aria-label', en ? EN[k] : ESA[k]); });
+    var legal = document.querySelector('[data-t="pie_legal"]');
+    if (legal) legal.setAttribute('href', en ? 'privacidad.html#en' : 'privacidad.html');
+    var bt = document.getElementById('f-enviar');
+    if (bt && bt.disabled) bt.textContent = MSG[idioma].enviando;
+    if (nombreHecho) document.getElementById('hecho-h').textContent = MSG[idioma].hecho.replace('{n}', function () { return nombreHecho; });
+    document.querySelector('main').lang = idioma;
+    document.documentElement.lang = idioma;
+    document.getElementById('lang-es').setAttribute('aria-pressed', String(!en));
+    document.getElementById('lang-en').setAttribute('aria-pressed', String(en));
+    document.querySelectorAll('.err:not([hidden])').forEach(function (e) { if (e.dataset.k) e.textContent = MSG[idioma][e.dataset.k]; });
+    try { localStorage.setItem('ms-idioma', idioma); } catch (e) {}
+  }
+  document.getElementById('lang-es').addEventListener('click', function () { ponIdioma('es'); });
+  document.getElementById('lang-en').addEventListener('click', function () { ponIdioma('en'); });
+  var q = null, guardado = null;
+  try { q = new URLSearchParams(location.search).get('lang'); } catch (e) {}
+  try { guardado = localStorage.getItem('ms-idioma'); } catch (e) {}
+  var inicial = q || guardado || ((navigator.language || '').toLowerCase().indexOf('en') === 0 ? 'en' : 'es');
+  if (inicial === 'en') ponIdioma('en');
+
+  /* ---------- botón fijo del móvil: aparece al dejar atrás la portada y se va al llegar al formulario ---------- */
+  var barra = document.getElementById('barra-cta');
+  var portada = document.getElementById('inicio');
+  var solicitud = document.getElementById('solicitud');
+  var pendiente = false;
+  function colocaBarra() {
+    pendiente = false;
+    var pasada = portada.getBoundingClientRect().bottom < 0;
+    var antesDelForm = solicitud.getBoundingClientRect().top > window.innerHeight * 0.85;
+    barra.hidden = !(pasada && antesDelForm);
+  }
+  window.addEventListener('scroll', function () { if (!pendiente) { pendiente = true; requestAnimationFrame(colocaBarra); } }, { passive: true });
+  window.addEventListener('resize', colocaBarra);
+  colocaBarra();
+
+  /* ---------- solicitud ---------- */
+  var form = document.getElementById('form-solicitud');
+  function error(campoId, errId, clave, mostrar) {
+    var c = document.getElementById(campoId), e = document.getElementById(errId);
+    if (!c || !e) return;
+    c.classList.toggle('mal', mostrar);
+    e.hidden = !mostrar;
+    e.dataset.k = clave;
+    e.textContent = mostrar ? MSG[idioma][clave] : '';
+    c.querySelectorAll('input,textarea').forEach(function (i) {
+      if (mostrar) i.setAttribute('aria-invalid', 'true'); else i.removeAttribute('aria-invalid');
+    });
+  }
+  function valorRadio(nombre) { var r = form.querySelector('input[name="' + nombre + '"]:checked'); return r ? r.value : ''; }
+  function marcados(nombre) { return Array.prototype.map.call(form.querySelectorAll('input[name="' + nombre + '"]:checked'), function (i) { return i.value; }); }
+
+  var REGLAS = [
+    { campo: 'c-nombre', err: 'e-nombre', k: 'nombre', foco: 'f-nombre', ok: function () { return form.nombre.value.trim().length >= 2; } },
+    { campo: 'c-email', err: 'e-email', k: 'email', foco: 'f-email', ok: function () { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.email.value.trim()); } },
+    { campo: 'c-tel', err: 'e-tel', k: 'tel', foco: 'f-tel', ok: function () { return form.telefono.value.replace(/\D/g, '').length >= 9; } },
+    { campo: 'c-ciudad', err: 'e-ciudad', k: 'ciudad', foco: 'f-ciudad', ok: function () { return form.ciudad.value.trim().length >= 2; } },
+    { campo: 'c-actual', err: 'e-actual', k: 'varias', foco: 'f-act-fuerza', ok: function () { return marcados('actual').length > 0; } },
+    { campo: 'c-objetivo', err: 'e-objetivo', k: 'radio', foco: 'f-obj-estetica', ok: function () { return !!valorRadio('objetivo'); } },
+    { campo: 'c-dias', err: 'e-dias', k: 'radio', foco: 'f-dias-3', ok: function () { return !!valorRadio('dias'); } },
+    { campo: 'c-m1', err: 'e-m1', k: 'radio', foco: 'f-m1-si', ok: function () { return !!valorRadio('socio_metropolitan'); } },
+    { campo: 'c-m2', err: 'e-m2', k: 'radio', foco: 'f-m2-si', ok: function () { return valorRadio('socio_metropolitan') !== 'no' || !!valorRadio('fue_socio_metropolitan'); } },
+    { campo: 'c-m3', err: 'e-m3', k: 'radio', foco: 'f-m3-si', ok: function () { return valorRadio('socio_metropolitan') !== 'no' || !!valorRadio('planea_socio_metropolitan'); } },
+    { campo: 'c-ok', err: 'e-ok', k: 'ok', foco: 'f-ok', ok: function () { return form.privacidad.checked; } }
+  ];
+  REGLAS.forEach(function (r) {
+    var c = document.getElementById(r.campo);
+    c.addEventListener('change', function () { if (r.ok()) error(r.campo, r.err, r.k, false); });
+    c.addEventListener('input', function () { if (r.ok()) error(r.campo, r.err, r.k, false); });
+  });
+
+  form.querySelectorAll('input[name="socio_metropolitan"]').forEach(function (i) {
+    i.addEventListener('change', function () {
+      var no = valorRadio('socio_metropolitan') === 'no';
+      document.getElementById('c-m2').hidden = !no;
+      document.getElementById('c-m3').hidden = !no;
+      if (!no) { error('c-m2', 'e-m2', 'radio', false); error('c-m3', 'e-m3', 'radio', false); }
+    });
+  });
+
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var primero = null;
+    REGLAS.forEach(function (r) {
+      var bien = r.ok();
+      error(r.campo, r.err, r.k, !bien);
+      if (!bien && !primero) primero = r.foco;
+    });
+    if (primero) { document.getElementById(primero).focus(); return; }
+
+    var datos = {
+      enviado: new Date().toISOString(), idioma: idioma,
+      nombre: form.nombre.value.trim(), email: form.email.value.trim(), telefono: form.telefono.value.trim(),
+      ciudad: form.ciudad.value.trim(), instagram: form.instagram.value.trim(),
+      entrena_ahora: marcados('actual').join(', '), objetivo: valorRadio('objetivo'), dias: valorRadio('dias'),
+      competicion: form.competicion.value.trim(),
+      socio_metropolitan: valorRadio('socio_metropolitan'), fue_socio_metropolitan: valorRadio('socio_metropolitan') === 'no' ? valorRadio('fue_socio_metropolitan') : '',
+      planea_socio_metropolitan: valorRadio('socio_metropolitan') === 'no' ? valorRadio('planea_socio_metropolitan') : '',
+      mensaje: form.mensaje.value.trim(), privacidad: true
+    };
+    datos.web = form.web.value;
+    var boton = document.getElementById('f-enviar');
+    var errEnvio = document.getElementById('e-envio');
+    errEnvio.hidden = true;
+    boton.disabled = true;
+    boton.textContent = MSG[idioma].enviando;
+
+    var envio = ENVIO
+      ? fetch(ENVIO, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(datos) })
+          .then(function (r) { return r.json(); })
+          .then(function (j) { if (!j || !j.ok) throw new Error((j && j.error) || 'respuesta'); })
+      : Promise.reject(new Error('sin destino'));
+
+    envio.then(function () {
+      var nombre = datos.nombre.split(/\s+/)[0];
+      nombreHecho = nombre;
+      var h = document.getElementById('hecho-h');
+      h.textContent = MSG[idioma].hecho.replace('{n}', nombre);
+      var agenda = document.getElementById('agenda');
+      if (AGENDA) {
+        agenda.href = AGENDA; agenda.target = '_blank'; agenda.rel = 'noopener'; agenda.hidden = false;
+      } else {
+        document.getElementById('hecho-p').hidden = true;
+        document.getElementById('hecho-sin').hidden = false;
+      }
+      document.getElementById('campos').hidden = true;
+      document.getElementById('hecho').hidden = false;
+      h.focus();
+    }).catch(function () {
+      errEnvio.dataset.k = 'envio';
+      errEnvio.textContent = MSG[idioma].envio;
+      errEnvio.hidden = false;
+      boton.disabled = false;
+      var kb = boton.dataset.t;
+      boton.innerHTML = idioma === 'en' ? EN[kb] : ES[kb];
+    });
+  });
+})();
+</script>
+</body>
+</html>

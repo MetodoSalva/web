@@ -21,6 +21,17 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.bunny.net">
 <link rel="stylesheet" href="https://fonts.bunny.net/css?family=ibm-plex-mono:400,500|ibm-plex-sans:400,500,600,700|ibm-plex-sans-condensed:500,600,700&amp;display=swap">
+<script>
+/* movimiento al bajar: solo si el navegador puede y la persona no lo ha desactivado.
+   Si el script de abajo no arranca en 2,5 s, se quita y todo se ve quieto. */
+(function () {
+  var d = document.documentElement;
+  if ('IntersectionObserver' in window && window.matchMedia && matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+    d.classList.add('mov');
+    setTimeout(function () { if (!window.__mov) d.classList.remove('mov'); }, 2500);
+  }
+})();
+</script>
 <style>
 :root{
   --papel:#F1EDE6; --sup:#FBF9F4; --sunk:#E8E2D7; --linea:#DDD5C8; --linea-2:#C9BFAF;
@@ -356,6 +367,51 @@ textarea.in{min-height:92px;resize:vertical}
   background:color-mix(in srgb,var(--papel) 94%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-top:1px solid var(--linea)}
 .barra-cta .btn{width:100%}
 @media (min-width:760px){ .barra-cta{display:none} }
+
+/* ---------- movimiento al bajar (v. 2 oct). Sin .mov todo se ve quieto, tal cual ---------- */
+.top .prog{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--verde);transform-origin:0 50%;transform:scaleX(0);pointer-events:none}
+.top{transition:box-shadow .3s}
+.top.scr{box-shadow:0 10px 28px -18px rgba(0,0,0,.45)}
+.mov :is(.sec .kick,.sec h2,.sec .lead,.quien-p,.ig,.remate,.nota-ej,.tendencia,.frase,.suena-t,.suena li,.paso,.feat,
+  .faq details,.comp-fila,.ej,.ciclo li,.pills>*,.flecha,.quien-decide,.etapas li,.dias .d,.dias-cap,.etapas-t,.sets .set){opacity:0;translate:0 26px;
+  transition:opacity .8s cubic-bezier(.2,.7,.2,1),translate .8s cubic-bezier(.2,.7,.2,1),scale .6s cubic-bezier(.34,1.56,.64,1);
+  transition-delay:calc(var(--i,0) * 85ms)}
+.mov :is(.sec .kick,.sec h2,.sec .lead,.quien-p,.ig,.remate,.nota-ej,.tendencia,.frase,.suena-t,.suena li,.paso,.feat,
+  .faq details,.comp-fila,.ej,.ciclo li,.pills>*,.flecha,.quien-decide,.etapas li,.dias .d,.dias-cap,.etapas-t,.sets .set).vis{opacity:1;translate:0 0}
+.mov .sec h2{translate:0 .4em;filter:blur(8px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),translate .9s cubic-bezier(.2,.7,.2,1),filter .9s cubic-bezier(.2,.7,.2,1)}
+.mov .sec h2.vis{filter:none}
+.mov .paso{translate:-26px 0}
+.mov .paso.vis{translate:0 0}
+.mov .pills>*{scale:.7;translate:0 10px}
+.mov .pills>*.vis{scale:1}
+.mov .flecha.vis{animation:bota 1.5s .6s ease-in-out 2}
+@keyframes bota{50%{translate:0 7px}}
+.mov .dias .d .d-m{transform:scaleY(.15);transform-origin:50% 100%;transition:transform .7s cubic-bezier(.34,1.4,.64,1);transition-delay:calc(var(--i,0) * 85ms + .15s)}
+.mov .dias .d.vis .d-m{transform:none}
+.mov .comp-fila .peso::after{width:0;transition:width 1.1s cubic-bezier(.2,.7,.2,1) .35s}
+.mov .comp-fila.vis .peso::after{width:var(--w)}
+.mov .ciclo li.fin.vis{animation:late 1.6s 1s ease-out 2}
+@keyframes late{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--verde) 55%,transparent)}100%{box-shadow:0 0 0 12px transparent}}
+.mov .sets .set{translate:22px 0}
+.mov .sets .set.vis{translate:0 0}
+.mov .set em.hecho::before{scale:0;transition:scale .45s cubic-bezier(.34,1.56,.64,1);transition-delay:calc(var(--i,0) * 85ms + .45s)}
+.mov .set.vis em.hecho::before{scale:1}
+.mov .set em.reg{animation:late 2.2s 1.6s ease-out infinite}
+.mov :is(.remate,.frase) em{background:linear-gradient(currentColor,currentColor) no-repeat 0 100% / 0 .07em;transition:background-size 1.1s cubic-bezier(.2,.7,.2,1) .5s}
+.mov :is(.remate,.frase).vis em{background-size:100% .07em}
+/* portada: entra al cargar */
+.mov .hero .wrap>div:first-child>*{animation:sube .9s cubic-bezier(.2,.7,.2,1) both}
+.mov .hero .wrap>div:first-child>:nth-child(2){animation-delay:.1s}
+.mov .hero .wrap>div:first-child>:nth-child(3){animation-delay:.22s}
+.mov .hero .wrap>div:first-child>:nth-child(4){animation-delay:.34s}
+.mov .hero .wrap>div:first-child>:nth-child(5){animation-delay:.46s}
+@keyframes sube{from{opacity:0;translate:0 24px}}
+.mov .movil{animation:entraMovil 1.2s .3s cubic-bezier(.2,.7,.2,1) both;will-change:transform}
+@keyframes entraMovil{from{opacity:0;translate:0 70px;rotate:-5deg}}
+.mov .movil .ax-bar i{animation:llena 1.3s 1.2s cubic-bezier(.2,.7,.2,1) both}
+@keyframes llena{from{width:0}}
+.mov .ej{will-change:transform}
+@media print{ .mov *{opacity:1!important;translate:none!important;filter:none!important;animation:none!important} }
 </style>
 
 </head>
@@ -596,6 +652,7 @@ textarea.in{min-height:92px;resize:vertical}
     <div>
       <p class="quien-p" data-t="sal_p1">Entrenamiento personal especializado en combinar físico y rendimiento, construido sobre evidencia y ajustado con el seguimiento de cada persona.</p>
       <p class="quien-p" data-t="sal_p2">El método nace de ver que a la mayoría no le faltaba esfuerzo: le faltaba organización.</p>
+      <p class="quien-p" data-t="sal_p3">Entreno en persona en el Club Metropolitan Abascal, en Madrid. Si puedes venir, es ahí donde trabajamos juntos. Si no puedes, porque vives en otra ciudad o en otro país, por horarios o porque entrenas en otro gimnasio y no puedes cambiarte, el método también funciona a distancia: tu plan, la app y el seguimiento de cada semana.</p>
       <p class="ig"><span data-t="ig_txt">El día a día, en Instagram:</span> <a href="https://www.instagram.com/salva.trainer/" target="_blank" rel="noopener">@salva.trainer</a></p>
     </div>
   </div>
@@ -745,6 +802,8 @@ textarea.in{min-height:92px;resize:vertical}
       <h2 data-t="faq_h2">Lo que suele preguntarse.</h2>
     </div>
     <div class="faq">
+      <details><summary data-t="q6">¿Es presencial u online?</summary><p data-t="a6">Presencial siempre que se pueda, en el Club Metropolitan Abascal (Madrid). ¿Vives lejos, tus horarios no te dejan venir o entrenas en otro gimnasio y no puedes cambiarte, pero necesitas un plan con estructura? Método SALVA no te abandona: te acompaño a distancia con tu plan, la app y el seguimiento semanal.</p></details>
+      <details><summary data-t="q7">¿Tengo que ser socio o socia de Metropolitan?</summary><p data-t="a7">Si vives cerca y puedes venir, sí: es donde entrenamos. Si no, no hace falta: el seguimiento a distancia no depende de ningún gimnasio.</p></details>
       <details><summary data-t="q1">¿Cuánto cuesta?</summary><p data-t="a1">Cada plan es personalizado, así que depende de lo que necesites. Se habla en la llamada.</p></details>
       <details><summary data-t="q5">¿Qué pasa después de la llamada?</summary><p data-t="a5">Si el método encaja contigo, haces una valoración completa y a partir de ahí se construye tu plan.</p></details>
       <details><summary data-t="q2">¿Necesito experiencia?</summary><p data-t="a2">No. La valoración mide desde dónde partes y el plan empieza ahí.</p></details>
@@ -840,6 +899,7 @@ textarea.in{min-height:92px;resize:vertical}
     sal_kick: 'Who’s behind it', sal_h2: 'Created by Salvador Martínez.',
     sal_p1: 'Personal training specialised in combining physique and performance, built on evidence and adjusted through each person’s follow-up.',
     sal_p2: 'The method was born from seeing that most people didn’t lack effort: they lacked organisation.',
+    sal_p3: 'I coach in person at Club Metropolitan Abascal, in Madrid. If you can come, that’s where we work together. If you can’t, because you live in another city or country, because of your schedule or because you train at another gym you can’t leave, the method also works remotely: your plan, the app and a check-in every week.',
     ig_txt: 'Day to day, on Instagram:',
     sol_kick: 'Talk to Salva', sol_h2: 'Tell me what you’re training.',
     sol_lead: 'Two minutes. Once you send it, you pick a time for the call.',
@@ -859,6 +919,8 @@ textarea.in{min-height:92px;resize:vertical}
     hecho_sin: 'Salva will get in touch to book the call. If you don’t hear back, message <a href="https://www.instagram.com/salva.trainer/" target="_blank" rel="noopener">@salva.trainer</a> on Instagram.',
     enviar_sin: 'Send request', sol_lead_sin: 'Two minutes. Then Salva gets in touch to book the call.',
     faq_kick: 'Questions', faq_h2: 'What people usually ask.',
+    q6: 'Is it in person or online?', a6: 'In person whenever possible, at Club Metropolitan Abascal (Madrid). Live far away, can’t make it work with your schedule, or train at another gym you can’t leave, but need a structured plan? Método SALVA won’t leave you on your own: I coach you remotely with your plan, the app and a weekly check-in.',
+    q7: 'Do I need to be a Metropolitan member?', a7: 'If you live nearby and can come, yes: that’s where we train. If not, there’s no need: remote coaching doesn’t depend on any gym.',
     q1: 'How much does it cost?', a1: 'Every plan is personalised, so it depends on what you need. It’s covered on the call.',
     q5: 'What happens after the call?', a5: 'If the method fits you, you do a full assessment and your plan is built from there.',
     q2: 'Do I need experience?', a2: 'No. The assessment measures where you’re starting from, and the plan starts there.',
@@ -1045,6 +1107,56 @@ textarea.in{min-height:92px;resize:vertical}
       boton.innerHTML = idioma === 'en' ? EN[kb] : ES[kb];
     });
   });
+})();
+/* ---------- movimiento al bajar ---------- */
+(function () {
+  var d = document.documentElement;
+  if (!d.classList.contains('mov')) return;
+  window.__mov = true;
+  var SEL = '.sec .kick,.sec h2,.sec .lead,.quien-p,.ig,.remate,.nota-ej,.tendencia,.frase,.suena-t,.suena li,.paso,.feat, .faq details,.comp-fila,.ej,.ciclo li,.pills>*,.flecha,.quien-decide,.etapas li,.dias .d,.dias-cap,.etapas-t,.sets .set';
+  var els = [].slice.call(document.querySelectorAll(SEL));
+  els.forEach(function (el) {
+    var hermanos = [].filter.call(el.parentNode.children, function (h) { return h.matches(SEL); });
+    var i = hermanos.indexOf(el);
+    if (i > 0) el.style.setProperty('--i', Math.min(i, 8));
+  });
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+  els.forEach(function (el) { io.observe(el); });
+
+  /* cabecera: barra de avance y sombra */
+  var top = document.querySelector('.top');
+  var prog = document.createElement('div'); prog.className = 'prog'; prog.setAttribute('aria-hidden', 'true');
+  top.appendChild(prog);
+  /* el móvil de la portada sube más despacio que la página, y los dos móviles se inclinan con el ratón */
+  var movil = document.querySelector('.movil'), ej = document.querySelector('.ej');
+  var ancho = matchMedia('(min-width: 960px)'), raton = matchMedia('(hover: hover) and (pointer: fine)');
+  var tilt = { movil: [0, 0], ej: [0, 0] };
+  function pinta() {
+    var y = window.scrollY, alto = d.scrollHeight - window.innerHeight;
+    prog.style.transform = 'scaleX(' + (alto > 0 ? Math.min(1, y / alto) : 0) + ')';
+    top.classList.toggle('scr', y > 8);
+    var py = ancho.matches ? Math.min(y, 900) * -0.12 : 0;
+    movil.style.transform = 'perspective(900px) translateY(' + py.toFixed(1) + 'px) rotateX(' + tilt.movil[0] + 'deg) rotateY(' + tilt.movil[1] + 'deg)';
+    ej.style.transform = 'perspective(900px) rotateX(' + tilt.ej[0] + 'deg) rotateY(' + tilt.ej[1] + 'deg)';
+  }
+  var pend = false;
+  function pide() { if (!pend) { pend = true; requestAnimationFrame(function () { pend = false; pinta(); }); } }
+  window.addEventListener('scroll', pide, { passive: true });
+  window.addEventListener('resize', pide);
+  [['movil', movil], ['ej', ej]].forEach(function (par) {
+    var k = par[0], el = par[1];
+    el.style.transition = 'transform .25s ease-out';
+    el.addEventListener('pointermove', function (e) {
+      if (!raton.matches) return;
+      var r = el.getBoundingClientRect();
+      tilt[k] = [(((e.clientY - r.top) / r.height) - .5) * -7, (((e.clientX - r.left) / r.width) - .5) * 9];
+      pide();
+    });
+    el.addEventListener('pointerleave', function () { tilt[k] = [0, 0]; pide(); });
+  });
+  pinta();
 })();
 </script>
 </body>
